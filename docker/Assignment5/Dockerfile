@@ -1,9 +1,7 @@
 FROM golang:alpine
 
-RUN apk add git
 RUN apk add make
-RUN apk add curl
-RUN git clone https://github.com/docker-ninja/go-app.git
+COPY . ./go-app
 WORKDIR go-app
 RUN make build
 
