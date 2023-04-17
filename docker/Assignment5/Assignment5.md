@@ -3,7 +3,7 @@
     docker/Assignment5/docker-compose.yaml
 
 
-# Commands to run
+# Build docker image & run container using docker-compose.yaml
     docker-compose up -d
 
 # Health check to determine application up or not
