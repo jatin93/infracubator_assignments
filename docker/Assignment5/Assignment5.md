@@ -5,5 +5,9 @@
 
 # Commands to run
     docker-compose up -d
-    curl https://localhost:8080/
-    
+
+# Health check to determine application up or not
+    curl http://localhost:5000/
+
+# docker compose down
+    docker-compose down
