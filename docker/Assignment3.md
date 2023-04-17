@@ -2,7 +2,7 @@
 
 # 1. Build stage
     FROM golang as build-go
-    RUN git clone https://github.com/docker-ninja/go-app.git
+    COPY . ./go-app
     WORKDIR /go/go-app
     RUN make build-linux
 
