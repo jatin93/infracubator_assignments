@@ -1,0 +1,6 @@
+version: '3'
+services:
+  goapp:
+    image: jateensharma/go-app/gomultistage:v1
+    ports:
+      - 8080:8080
