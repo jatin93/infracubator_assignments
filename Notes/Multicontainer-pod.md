@@ -65,3 +65,85 @@ spec:
 
   fix the issue and run cmd
   kubectl create -f dummy.yaml 
+
+# rediness probe with spec 
+  ## Pod Name: simple-webapp-2
+  ## Image Name: kodekloud/webapp-delayed-start
+  ## Readiness Probe: httpGet
+  ## Http Probe: /ready
+  ## Http Port: 8080
+
+    get current pod defination details
+    kubectl get pod simple-webapp-2 -o yaml > pod-def.yaml
+
+    Edit pod-def.yaml to add rediness probe
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      creationTimestamp: "2023-05-05T19:00:47Z"
+      labels:
+        name: simple-webapp
+      name: simple-webapp-2
+      namespace: default
+      resourceVersion: "1243"
+      uid: 4fb469b0-5388-43bd-bd24-a5bfb95b1784
+    spec:
+      containers:
+      - env:
+        - name: APP_START_DELAY
+          value: "80"
+        image: kodekloud/webapp-delayed-start
+        imagePullPolicy: Always
+        name: simple-webapp
+        readinessProbe: 
+          httpGet:
+            path: /ready
+        port: 8080
+
+# Create pods with a livenessProbe using the given spec
+  ## Pod Name: simple-webapp-1
+  ## Image Name: kodekloud/webapp-delayed-start
+  ## Liveness Probe: httpGet
+  ## Http Probe: /live
+  ## Http Port: 8080
+  ## Period Seconds: 1
+  ## Initial Delay: 80
+  ## Pod Name: simple-webapp-2
+  ## Image Name: kodekloud/webapp-delayed-start
+  ## Liveness Probe: httpGet
+  ## Http Probe: /live
+  ## Http Port: 8080
+  ## Initial Delay: 80
+  ## Period Seconds: 1
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-05-05T19:00:47Z"
+  labels:
+    name: simple-webapp
+  name: simple-webapp-2
+  namespace: default
+  resourceVersion: "1243"
+  uid: 4fb469b0-5388-43bd-bd24-a5bfb95b1784
+spec:
+  containers:
+  - env:
+    - name: APP_START_DELAY
+      value: "80"
+    image: kodekloud/webapp-delayed-start
+    imagePullPolicy: Always
+    name: simple-webapp
+    livenessProbe: 
+      httpGet:
+        path: /live
+        port: 8080
+      initialDelaySeconds: 80
+      periodSeconds: 1
+
+# kubectl logs
+  kubectl logs -f <podname> <containerNAme>
+
+# Get resources based on selector
+  kubectl get pods/replicaset/deployment --selector LabelName=LabelValue
+  kubectl get all --selector LabelName=LabelValue,LabelName1=LabelValue1,LabelName2=LabelValue2
