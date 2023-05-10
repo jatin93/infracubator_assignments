@@ -98,7 +98,7 @@ spec:
         readinessProbe: 
           httpGet:
             path: /ready
-        port: 8080
+            port: 8080
 
 # Create pods with a livenessProbe using the given spec
   ## Pod Name: simple-webapp-1
