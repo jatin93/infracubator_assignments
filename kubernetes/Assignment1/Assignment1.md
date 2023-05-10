@@ -4,16 +4,8 @@
     image : luckyganesh/metadata-service:v1.0 ( for M1 chip - luckyganesh/metadata-service:v1.0-arm )
     Port to be exposed 8080
 
-    apiVersion: v1
-    kind: Pod
-    metadata:
-        name: metadataservice
-    spec:
-        containers:
-        - name: metaservice
-            image: luckyganesh/metadata-service:v1
-            ports:
-            - containerPort: 8080
+    kubectl create -f <path-to-file-containing-pod-creation-spec.yaml>
+    kubectl create -f pod-defination.yaml
 
 # Check the logs
     kubectl logs -f <podName> <containerName>

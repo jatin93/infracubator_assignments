@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: metadataservice
+spec:
+    containers:
+    - name: metaservice
+        image: luckyganesh/metadata-service:v1
+        ports:
+        - containerPort: 8080
