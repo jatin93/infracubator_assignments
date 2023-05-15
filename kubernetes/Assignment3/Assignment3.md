@@ -1,6 +1,7 @@
 # Create NodePort Service for the MetadataService and access following via NodePort from host machine
     file -> service-definition.yaml
 
+
 # POST to create an meta entry in the database
 ## Hitting the service from host outside the minikube
     minikube ip -> 192.168.64.2
@@ -39,4 +40,9 @@
     
 
 # NOTE: If GET returning empty array (no result) or only few entries, goto nextexercise to learn why?
-    Getting all entries from inside the minikube and also from host machine
+    
+    If the pod is created using the file pod-defination.yaml, then each and every entry will be retrieved in the get call.
+
+    If the pod is created using the file pod-by-replicaset.yaml, then each and every entry will not be retrived in the get call.
+        The reason for not getting each and every entry in get api call is that since the application is using in memory db so each k8 pod for the metadataservice will have its own in memory db.
+        Since there are 2 pods the api calls are serviced by either of the pods, hence there can be a case where total 3 POST req are made which might be served by different pods so on GET api call whichever pod is serving the request the data from its in memory db will be returned
