@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      name: mongo-pod
+      labels:
+        app: mongodb
+    spec:
+      volumes:
+        - name: mongo-pod-volume
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim
+      containers:
+        - name: mongo
+          image: mongo:latest
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-pod-volume
