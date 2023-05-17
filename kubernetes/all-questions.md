@@ -40,3 +40,15 @@ folder path https://hub.docker.com//mongo/ (the mount path for
 mongo should be /data/db)
 Delete and Recreate MongoDB pod and see no data loss
 
+
+→ Run the mongo database with the persistent volume using PV and PVC
+-> Use hostPath to define PV
+→ Delete and Recreate MongoDB pod and see no data loss
+
+
+Use a env mongo URL in metadata service
+Create a configmap for mongo configuration url and pass it as ENV to metadata-service under key: MONGODB_URI
+
+
+Use a secret mongo URL in metadata service
+Create a K8S Secret Object with mongo configuration url and pass it as ENV to metadata-service under key: MONGODB_URI

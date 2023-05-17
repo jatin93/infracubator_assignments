@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongo-pv-claim
+spec:
+  storageClassName: manual
+  selector:
+    matchLabels:
+      type: mongo-pv
+  accessModes:
+      - ReadWriteMany
+  resources:
+      requests:
+        storage: 20Mi
